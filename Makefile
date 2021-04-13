@@ -1,12 +1,16 @@
-CC = gcc
-
 default: dsatest
 
-dsalib.a : dsa.o
-	ar rcs libdsalib.a
+dsatest: main.o dsa.o
+	gcc -o dsatest main.o dsa.o
 
-dsa.o: dsa.c dsa.h
-	$(CC) -c $< -o $@
+main.o: main.c
+	gcc -c -g main.c
+
+dsa.o: dsa.c
+	gcc -c -g dsa.c
+
+clean:
+	rm main.o dsa.o dsatest
 
 
 
