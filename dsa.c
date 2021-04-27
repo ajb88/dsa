@@ -1,8 +1,10 @@
 #include<stdlib.h>
+#include<stdio.h>
 #include<limits.h>
 #include<math.h>
+#include "dsa.h"
 
-
+/* merge sort */
 void merge(int *A, int p, int q, int r)
 {
     int n1 = q - p + 1;
@@ -44,3 +46,42 @@ void merge_sort(int *A, int p, int r)
     }
 }
 
+/* linked list */
+node *list_search(list *L, int k)
+{
+    node *x = L->nil->next;
+    while(x != L->nil && x->key != k)
+	x = x->next;
+    return x; 
+}
+
+void list_insert(list *L, int k)
+{
+    node *x = malloc(sizeof(node));
+    x->key = k; 
+    x->next = L->nil->next;
+    L->nil->next->prev = x;
+    L->nil->next = x; 
+    x->prev = L->nil;
+}
+
+void list_delete(list *L, int k)
+{
+    node *x = L->nil->next;
+    while(x->key != k)
+	x = x->next;
+    x->prev->next = x->next;
+    x->next->prev = x->prev; 
+}
+
+void print_list(list *L)
+{
+    node *x = L->nil->next;
+    while(x != L->nil)
+    {
+	printf("%d ", x->key);
+	x = x->next; 
+    }
+	
+    printf("\n"); 
+}
